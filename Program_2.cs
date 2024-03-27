@@ -1,7 +1,4 @@
-﻿// Даны числа A, B, C. Меньшее из них надо утроить, "среднее" по величине надо удвоить. После этого вновь найти большее, "среднее" и меньшее.
-
-using System;
-
+// Даны числа A, B, C. Меньшее из них надо утроить, "среднее" по величине надо удвоить. После этого вновь найти большее, "среднее" и меньшее.
 class Program
 {
     static void Main()
@@ -13,23 +10,30 @@ class Program
         double B = double.Parse(Console.ReadLine());
         Console.WriteLine("Введите число C:");
         double C = double.Parse(Console.ReadLine());
+        double max = 0, min = 0, mid = 0;
 
-        // Находим минимальное, большое и среднее число
-        double min = Math.Min(A, Math.Min(B, C));
-        double max = Math.Max(A, Math.Max(B, C));
-        double mid = A + B + C - min - max;
+        // Находим максимальное число
+        if (A > B && A > C) max = A;
+        else if (B > A && B > C) max = B;
+        else max = C;
 
-        // Минималку X3
+        // Находим минимальное число
+        if (A < B && A < C) min = A;
+        else if (B < A && B < C) min = B;
+        else min = C;
+
+        // Находим среднее число
+        mid = A + B + C - max - min;
+
+        // Минимальное число утраиваем, а среднее удваиваем
         if (A == min) A *= 3;
-        else if (B == min) B *= 3;
-        else if (C == min) C *= 3;
-        
-        // Среднее X2
-        if (A == mid) A *= 2;
+        else if (A == mid) A *= 2;
+        if (B == min) B *= 3;
         else if (B == mid) B *= 2;
+        if (C == min) C *= 3;
         else if (C == mid) C *= 2;
 
-        // Вывод измененных значений
+        // Выводим измененные значения
         Console.WriteLine($"Новое значение A: {A}");
         Console.WriteLine($"Новое значение B: {B}");
         Console.WriteLine($"Новое значение C: {C}");
